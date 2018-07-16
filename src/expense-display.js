@@ -11,7 +11,7 @@ class ExpenseDisplay extends Component {
     renderExpenses() {
         return this.props.expenses.map((expense, index) =>
             <li key={index}>
-                <Expense {...expense} />
+                <Expense {...expense} deleteExpense={this.props.deleteExpense.bind(index)} />
             </li>);
     }
 

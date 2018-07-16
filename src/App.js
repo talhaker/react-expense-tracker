@@ -10,6 +10,8 @@ class App extends Component {
     super(props);
     this.state = { expenses: [] };
     this.addExpense = this.addExpense.bind(this);
+    this.deleteExpense = this.deleteExpense.bind(this);
+    this.editExpense = this.editExpense.bind(this);
 
     console.log(this.state);
   }
@@ -18,7 +20,24 @@ class App extends Component {
     this.setState({ expenses: this.state.expenses.concat(expense) }, () => {
       console.log('App: ', this.state.expenses)
     });
-}
+  }
+
+  deleteExpense(index, e) {
+    // Create a separate copy of the expenses array
+    const expenses = [...this.state.expenses];
+    expenses.splice(index, 1);
+
+    this.setState({ expenses: expenses }, () => {
+      console.log('App: ', this.state.expenses)
+    })
+  };
+  
+  editExpense(expense) {
+    this.setState({ expenses: this.state.expenses.concat(expense) }, () => {
+      console.log('App: ', this.state.expenses)
+    });
+  }
+
   render() {
     // return (
     //   <div className="App">
@@ -34,7 +53,7 @@ class App extends Component {
     return (
       <div className="App">
           <ExpenseForm addExpense={this.addExpense} />
-          <ExpenseDisplay expenses={this.state.expenses} />
+          <ExpenseDisplay expenses={this.state.expenses} deleteExpense={this.deleteExpense} />
       </div>
     );
   }

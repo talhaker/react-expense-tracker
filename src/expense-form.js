@@ -21,9 +21,7 @@ class ExpenseForm extends Component {
 
     onBtnClick(){
         this.props.addExpense(this.state);
-        this.setState({ amt: 0, cat: '', descr: '' }, () => {
-            console.log('expense-form: ', this.state);
-        });
+        this.setState({ amt: 0, cat: '', descr: '' });
     }
 
     render() {
