@@ -32,10 +32,11 @@ class App extends Component {
     })
   };
   
-  editExpense(expense) {
-    this.setState({ expenses: this.state.expenses.concat(expense) }, () => {
-      console.log('App: ', this.state.expenses)
-    });
+  editExpense(index, e) {
+    console.log('App: editExpense', index)
+    // this.setState({ expenses: this.state.expenses.concat(expense) }, () => {
+    //   console.log('App: ', this.state.expenses)
+    // });
   }
 
   render() {
@@ -52,8 +53,11 @@ class App extends Component {
     // );
     return (
       <div className="App">
-          <ExpenseForm addExpense={this.addExpense} />
-          <ExpenseDisplay expenses={this.state.expenses} deleteExpense={this.deleteExpense} />
+          <ExpenseForm buttonText="Add Expense" addExpense={this.addExpense} displayForm="true" />
+          <ExpenseDisplay
+            expenses={this.state.expenses}
+            deleteExpense={this.deleteExpense}
+            editExpense={this.props.editExpense} />
       </div>
     );
   }

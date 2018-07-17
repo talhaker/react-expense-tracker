@@ -25,16 +25,20 @@ class ExpenseForm extends Component {
     }
 
     render() {
-        return (
-            <div>
-               <form>
-                    <SingleInput id="amt" type="number" placeholder="$" content={this.state.amt} controlFunc={this.changeExpense}/>
-                    <SingleInput id="cat" type="text" placeholder="Category" content={this.state.cat} controlFunc={this.changeExpense}/>
-                    <SingleInput id="descr" type="text" placeholder="Description" content={this.state.descr} controlFunc={this.changeExpense}/>
-                    <button type="button" onClick={this.onBtnClick}>Add Expense</button>
-               </form>
-            </div>
-        );
+        if (this.props.displayForm) {
+            return (
+                <div>
+                   <form>
+                        <SingleInput id="amt" type="number" placeholder="$" content={this.state.amt} controlFunc={this.changeExpense}/>
+                        <SingleInput id="cat" type="text" placeholder="Category" content={this.state.cat} controlFunc={this.changeExpense}/>
+                        <SingleInput id="descr" type="text" placeholder="Description" content={this.state.descr} controlFunc={this.changeExpense}/>
+                        <button type="button" onClick={this.onBtnClick}>{this.props.buttonText}</button>
+                   </form>
+                </div>
+            );
+        }
+
+        return "";
     }
 }
 
