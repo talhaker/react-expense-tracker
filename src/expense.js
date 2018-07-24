@@ -11,8 +11,13 @@ class Expense extends Component {
         console.log(this.state);
     }
 
-    displayEditExpense() {
+    displayEditExpense = () => {
         this.setState({ displayEdit: true });
+    }
+
+    editExpense = (expense) => {
+        this.setState({ displayEdit: false });
+        this.props.editExpense(expense);
     }
 
     render() {
@@ -21,7 +26,16 @@ class Expense extends Component {
                 ${this.props.amt}, {this.props.cat}, {this.props.descr}
                 <button type="button" className="btn btn-danger" onClick={this.props.deleteExpense}>Remove</button>
                 <button type="button" className="btn" onClick={this.displayEditExpense}>Edit</button>
-                <ExpenseForm buttonText="Change" editExpense={this.props.editExpense} displayForm={this.state.displayEdit} />
+                { this.state.displayEdit &&
+                    <ExpenseForm
+                        index={this.props.index}
+                        amtVal={this.props.amt}
+                        catVal={this.props.cat}
+                        descrVal={this.props.descr}
+                        buttonText="Change"
+                        onBtnClick={this.props.editExpense}
+                    />
+                }
             </div>
         );
     }

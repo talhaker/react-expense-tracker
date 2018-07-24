@@ -9,31 +9,38 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { expenses: [] };
-    this.addExpense = this.addExpense.bind(this);
-    this.deleteExpense = this.deleteExpense.bind(this);
-    this.editExpense = this.editExpense.bind(this);
+    // this.addExpense = this.addExpense.bind(this);
+    // this.deleteExpense = this.deleteExpense.bind(this);
+    // this.editExpense = this.editExpense.bind(this);
 
     console.log(this.state);
   }
 
-  addExpense(expense) {
+  addExpense = expense => {
     this.setState({ expenses: this.state.expenses.concat(expense) }, () => {
       console.log('App: ', this.state.expenses)
     });
   }
 
-  deleteExpense(index, e) {
+  deleteExpense = index => {
     // Create a separate copy of the expenses array
     const expenses = [...this.state.expenses];
     expenses.splice(index, 1);
 
     this.setState({ expenses: expenses }, () => {
-      console.log('App: ', this.state.expenses)
+      console.log('App: ', this.state.expenses);
     })
   };
   
-  editExpense(index, e) {
-    console.log('App: editExpense', index)
+  editExpense = (expense, index) => {
+    const expenses = [...this.state.expenses];
+    expenses[index] = expense;
+
+    console.log('App: editExpense', index);;
+    this.setState({ expenses: expenses }, () => {
+      console.log('App: ', this.state.expenses);
+    })
+
     // this.setState({ expenses: this.state.expenses.concat(expense) }, () => {
     //   console.log('App: ', this.state.expenses)
     // });
@@ -53,11 +60,18 @@ class App extends Component {
     // );
     return (
       <div className="App">
-          <ExpenseForm buttonText="Add Expense" addExpense={this.addExpense} displayForm="true" />
+          <ExpenseForm
+            amtVal="$"
+            catVal="Category"
+            descrVal="Description"
+            buttonText="Add Expense"
+            onBtnClick={this.addExpense}
+          />
           <ExpenseDisplay
             expenses={this.state.expenses}
+            editExpense={this.editExpense}
             deleteExpense={this.deleteExpense}
-            editExpense={this.props.editExpense} />
+          />
       </div>
     );
   }

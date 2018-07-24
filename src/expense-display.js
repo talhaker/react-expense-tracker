@@ -3,16 +3,12 @@ import Expense from './expense';
 
 class ExpenseDisplay extends Component {
 
-    constructor(props) {
-        super(props);
-        this.renderExpenses = this.renderExpenses.bind(this);
-    }
-
-    renderExpenses() {
+    renderExpenses = () => {
         return this.props.expenses.map((expense, index) =>
             <li key={index}>
                 <Expense
                     {...expense}
+                    index={index}
                     deleteExpense={this.props.deleteExpense.bind(index)}
                     editExpense={this.props.editExpense} />
             </li>);
@@ -20,7 +16,7 @@ class ExpenseDisplay extends Component {
 
     render() {
         return (
-             <ul>
+            <ul>
                 {this.renderExpenses()}
             </ul>
         );
